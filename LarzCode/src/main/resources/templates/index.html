@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home - LarzCode</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .btn-custom {
+            margin: 0.5rem;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: transform 0.2s;
+            position: relative;
+            animation: float 3s ease-in-out infinite alternate;
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        /* Animation for fading in */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating animation for buttons */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* Confetti container */
+        #confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Confetti -->
+    <div id="confetti-container"></div>
+
+    <div class="container hero">
+        <h1>Welcome to LarzCode.net</h1>
+        <h2>Explore, Learn, and Manage Users with Ease</h2>
+
+        <div>
+            <a th:href="@{/list_users}" class="btn btn-light btn-custom text-primary">Login</a>
+            <a th:href="@{/register}" class="btn btn-light btn-custom text-success">Register</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 LarzCode. All rights reserved.
+    </footer>
+
+    <script>
+        // Confetti JS
+        const colors = ['#FF5E5E','#FFB85F','#FFF55E','#5EFF7F','#5FD1FF','#B95EFF'];
+        const container = document.getElementById('confetti-container');
+
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+            confetti.style.width = (5 + Math.random() * 10) + 'px';
+            confetti.style.height = confetti.style.width;
+            container.appendChild(confetti);
+        }
+    </script>
+
+</body>
+</html>
